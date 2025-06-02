@@ -13,11 +13,11 @@ class MenuScene extends Phaser.Scene {
   /**
    * This method is the constructor.
    */
-  constructor() {
-    super({ key: "menuScene" });
+  constructor () {
+    super({ key: 'menuScene' })
 
-    this.MenuSceneBackgroundImage = null;
-    this.startButton = null;
+    this.MenuSceneBackgroundImage = null
+    this.startButton = null
   }
 
   /**
@@ -26,18 +26,18 @@ class MenuScene extends Phaser.Scene {
    * before preload() and create().
    * @param {object} data Any data passed via ScenePlugin.add() or ScenePlugin.start().
    */
-  init(data) {
-    this.cameras.main.setBackgroundColor("#ffffff");
+  init (data) {
+    this.cameras.main.setBackgroundColor('#ffffff')
   }
 
   /**
    * Can be defined on your own Scenes.
    * Use it to load assets.
    */
-  preload() {
-    console.log("Menu Scene");
-    this.load.image("menuSceneBackground", "./assets/introrevolvers-scene.png");
-    this.load.image("startButton", "./assets/start-button.png");
+  preload () {
+    console.log('Menu Scene')
+    this.load.image('menuSceneBackground', './assets/introrevolvers-scene.png')
+    this.load.image('startButton', './assets/start-button.png')
   }
 
   /**
@@ -45,14 +45,14 @@ class MenuScene extends Phaser.Scene {
    * Use it to create your game objects.
    * @param {object} data Any data passed via ScenePlugin.add() or ScenePlugin.start().
    */
-  create(data) {
-    this.MenuSceneBackgroundImage = this.add.sprite(0, 0, "menuSceneBackground");
-    this.MenuSceneBackgroundImage.x = 1920 / 2;
-    this.MenuSceneBackgroundImage.y = 1080 / 2; 
+  create (data) {
+    this.MenuSceneBackgroundImage = this.add.sprite(0, 0, 'menuSceneBackground')
+    this.MenuSceneBackgroundImage.x = 1920 / 2
+    this.MenuSceneBackgroundImage.y = 1080 / 2
 
-    this.startButton = this.add.sprite(1920 / 2, 1080 / 2 + 100, "startButton");
-    this.startButton.setInteractive({useHandCursor: true});
-    this.startButton.on("pointerdown", () => this.clickButton());
+    this.startButton = this.add.sprite(1920 / 2, 1080 / 2 + 100, 'startButton')
+    this.startButton.setInteractive({ useHandCursor: true })
+    this.startButton.on('pointerdown', () => this.clickButton())
   }
 
   /**
@@ -61,12 +61,12 @@ class MenuScene extends Phaser.Scene {
    * @param {number} time The current time.
    * @param {number} delta The delta time in ms since the last frame.
    */
-  update(time, delta) {
+  update (time, delta) {
     // pass
   }
 
-  clickButton() {
-    this.scene.start("gameScene");
+  clickButton () {
+    this.scene.start('gameScene')
   }
 }
 

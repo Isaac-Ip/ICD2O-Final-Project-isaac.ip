@@ -13,8 +13,8 @@ class SplashScene extends Phaser.Scene {
   /**
    * This method is the constructor.
    */
-  constructor() {
-    super({ key: "splashScene" });
+  constructor () {
+    super({ key: 'splashScene' })
 
     this.splashSceneBackgroundImage = null
   }
@@ -25,17 +25,17 @@ class SplashScene extends Phaser.Scene {
    * before preload() and create().
    * @param {object} data Any data passed via ScenePlugin.add() or ScenePlugin.start().
    */
-  init(data) {
-    this.cameras.main.setBackgroundColor("#ffffff");
+  init (data) {
+    this.cameras.main.setBackgroundColor('#ffffff')
   }
 
   /**
    * Can be defined on your own Scenes.
    * Use it to load assets.
    */
-  preload() {
-    console.log("Splash Scene");
-    this.load.image("splashSceneBackground", "./assets/mths-scene.png")
+  preload () {
+    console.log('Splash Scene')
+    this.load.image('splashSceneBackground', './assets/mths-scene.png')
   }
 
   /**
@@ -43,7 +43,7 @@ class SplashScene extends Phaser.Scene {
    * Use it to create your game objects.
    * @param {object} data Any data passed via ScenePlugin.add() or ScenePlugin.start().
    */
-  create(data) {
+  create (data) {
     this.splashSceneBackgroundImage = this.add.sprite(
       0,
       0,
@@ -59,7 +59,7 @@ class SplashScene extends Phaser.Scene {
    * @param {number} time - The current time.
    * @param {number} delta - The delta time in ms since the last frame.
    */
-  update(time, delta) {
+  update (time, delta) {
     if (time > 3000) {
       this.scene.switch('titleScene')
     }
