@@ -4,10 +4,10 @@
 //
 // Created by: Isaac Ip
 // Created on: Apr 2025
-// This is the Menu Scene
+// This is the Level Scene
 
 /**
- * This class is the Menu Scene.
+ * This class is the Level Scene.
  */
 class MenuScene extends Phaser.Scene {
   /**
@@ -66,7 +66,7 @@ class MenuScene extends Phaser.Scene {
   }
 
   clickButton () {
-    this.scene.start('gameScene')
+    this.scene.start('levelScene')
   }
 }
 
