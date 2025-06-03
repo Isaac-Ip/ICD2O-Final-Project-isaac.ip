@@ -7,16 +7,16 @@
 // This is the Menu Scene
 
 /**
- * This class is the Menu Scene.
+ * This class is the Level Scene.
  */
-class MenuScene extends Phaser.Scene {
+class LevelScene extends Phaser.Scene {
   /**
    * This method is the constructor.
    */
   constructor () {
-    super({ key: 'menuScene' })
+    super({ key: 'levelScene' })
 
-    this.MenuSceneBackgroundImage = null
+    this.LevelSceneBackgroundImage = null
     this.startButton = null
   }
 
@@ -35,9 +35,12 @@ class MenuScene extends Phaser.Scene {
    * Use it to load assets.
    */
   preload () {
-    console.log('Menu Scene')
-    this.load.image('menuSceneBackground', './assets/introrevolvers-scene.png')
-    this.load.image('startButton', './assets/start-button.png')
+    console.log('Level Scene')
+    this.load.image('levelSceneBackground', './assets/difficulty-scene.png')
+    this.load.image('easyButton', './assets/easy-button.png')
+    this.load.image('mediumButton', './assets/medium-button.png')
+    this.load.image('hardButton', './assets/hard-button.png')
+    this.load.image('insaneButton', './assets/insane-button.png')
   }
 
   /**
@@ -46,11 +49,23 @@ class MenuScene extends Phaser.Scene {
    * @param {object} data Any data passed via ScenePlugin.add() or ScenePlugin.start().
    */
   create (data) {
-    this.MenuSceneBackgroundImage = this.add.sprite(0, 0, 'menuSceneBackground')
+    this.MenuSceneBackgroundImage = this.add.sprite(0, 0, 'levelSceneBackground')
     this.MenuSceneBackgroundImage.x = 1920 / 2
     this.MenuSceneBackgroundImage.y = 1080 / 2
 
-    this.startButton = this.add.sprite(1920 / 2, 1080 / 2 + 100, 'startButton')
+    this.startButton = this.add.sprite(1920 / 2, 1080 / 2 + 100, 'easyButton')
+    this.startButton.setInteractive({ useHandCursor: true })
+    this.startButton.on('pointerdown', () => this.clickButton())
+    
+    this.startButton = this.add.sprite(1920 / 2, 1080 / 2 + 100, 'mediumButton')
+    this.startButton.setInteractive({ useHandCursor: true })
+    this.startButton.on('pointerdown', () => this.clickButton())
+   
+    this.startButton = this.add.sprite(1920 / 2, 1080 / 2 + 100, 'hardButton')
+    this.startButton.setInteractive({ useHandCursor: true })
+    this.startButton.on('pointerdown', () => this.clickButton())
+    
+    this.startButton = this.add.sprite(1920 / 2, 1080 / 2 + 100, 'insaneButton')
     this.startButton.setInteractive({ useHandCursor: true })
     this.startButton.on('pointerdown', () => this.clickButton())
   }
@@ -66,8 +81,8 @@ class MenuScene extends Phaser.Scene {
   }
 
   clickButton () {
-    this.scene.start('levelScene')
+    this.scene.start('gameScene')
   }
 }
 
-export default MenuScene
+export default LevelScene
