@@ -55,19 +55,19 @@ class LevelScene extends Phaser.Scene {
     this.LevelSceneBackgroundImage = this.add.sprite(0, 0, 'levelSceneBackground')
     this.LevelSceneBackgroundImage.x = 1920 / 2
     this.LevelSceneBackgroundImage.y = 1080 / 2
-    
+
     this.startButton = this.add.sprite(1920 / 2, 1080 / 8 * 3, 'easyButton')
     this.startButton.setInteractive({ useHandCursor: true })
     this.startButton.on('pointerdown', () => this.clickButton())
-    
+
     this.startButton = this.add.sprite(1920 / 2, 1080 / 8 * 4, 'mediumButton')
     this.startButton.setInteractive({ useHandCursor: true })
     this.startButton.on('pointerdown', () => this.clickButton())
-    
+
     this.startButton = this.add.sprite(1920 / 2, 1080 / 8 * 5, 'hardButton')
     this.startButton.setInteractive({ useHandCursor: true })
     this.startButton.on('pointerdown', () => this.clickButton())
-    
+
     this.startButton = this.add.sprite(1920 / 2, 1080 / 8 * 6, 'insaneButton')
     this.startButton.setInteractive({ useHandCursor: true })
     this.startButton.on('pointerdown', () => this.clickButton())
