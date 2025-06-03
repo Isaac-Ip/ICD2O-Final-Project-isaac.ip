@@ -67,20 +67,27 @@ class LevelScene extends Phaser.Scene {
     this.easyButton = this.add.sprite(1920 / 2, 1080 / 8 * 3, 'easyButton')
     this.easyButton.setInteractive({ useHandCursor: true })
     this.easyButton.on('pointerdown', () => this.clickButton())
-    this.easyButton.on('pointerover', () => this.add.sprite(1920 / 2, 1080 / 8 * 3, 'easyDesc'))
-    this.easyButton.on('pointerout', () => this.easyDesc.destroy())
+    this.easyButton.on('pointerover', () => {this.easyDesc = this.add.sprite(1920 / 4 * 3, 1080 / 8 * 3, 'easyDesc');});
+    this.easyButton.on('pointerout', () => {this.easyDesc.destroy(); this.easyDesc = null;});
+
     
     this.mediumButton = this.add.sprite(1920 / 2, 1080 / 8 * 4, 'mediumButton')
     this.mediumButton.setInteractive({ useHandCursor: true })
     this.mediumButton.on('pointerdown', () => this.clickButton())
+    this.mediumButton.on('pointerover', () => {this.mediumDesc = this.add.sprite(1920 / 4 * 3, 1080 / 8 * 4, 'mediumDesc');});
+    this.mediumButton.on('pointerout', () => {this.mediumDesc.destroy(); this.mediumDesc = null;});
     
     this.hardButton = this.add.sprite(1920 / 2, 1080 / 8 * 5, 'hardButton')
     this.hardButton.setInteractive({ useHandCursor: true })
     this.hardButton.on('pointerdown', () => this.clickButton())
+    this.hardButton.on('pointerover', () => {this.hardDesc = this.add.sprite(1920 / 4 * 3, 1080 / 8 * 5, 'hardDesc');});
+    this.hardButton.on('pointerout', () => {this.hardDesc.destroy(); this.hardDesc = null;});
     
     this.insaneButton = this.add.sprite(1920 / 2, 1080 / 8 * 6, 'insaneButton')
     this.insaneButton.setInteractive({ useHandCursor: true })
     this.insaneButton.on('pointerdown', () => this.clickButton())
+    this.insaneButton.on('pointerover', () => {this.insaneDesc = this.add.sprite(1920 / 4 * 3, 1080 / 8 * 6, 'insaneDesc');});
+    this.insaneButton.on('pointerout', () => {this.insaneDesc.destroy(); this.insaneDesc = null;});
   }
 
   /**
