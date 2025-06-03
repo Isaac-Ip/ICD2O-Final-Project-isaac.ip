@@ -21,6 +21,10 @@ class LevelScene extends Phaser.Scene {
     this.mediumButton = null
     this.hardButton = null
     this.insaneButton = null
+    this.easyDesc = null
+    this.mediumDesc = null
+    this.hardDesc = null
+    this.insaneDesc = null
   }
 
   /**
@@ -44,6 +48,10 @@ class LevelScene extends Phaser.Scene {
     this.load.image('mediumButton', './assets/medium-button.png')
     this.load.image('hardButton', './assets/hard-button.png')
     this.load.image('insaneButton', './assets/insane-button.png')
+    this.load.image('easyDesc', './assets/easy-desc.png')
+    this.load.image('mediumDesc', './assets/medium-desc.png')
+    this.load.image('hardDesc', './assets/hard-desc.png')
+    this.load.image('insaneDesc', './assets/insane-desc.png')
   }
 
   /**
@@ -59,7 +67,8 @@ class LevelScene extends Phaser.Scene {
     this.easyButton = this.add.sprite(1920 / 2, 1080 / 8 * 3, 'easyButton')
     this.easyButton.setInteractive({ useHandCursor: true })
     this.easyButton.on('pointerdown', () => this.clickButton())
-    this.easyButton.on('pointerover', () => this.add.sprite())
+    this.easyButton.on('pointerover', () => this.add.sprite(1920 / 2, 1080 / 8 * 3, 'easyDesc'))
+    this.easyButton.on('pointerout', () => this.easyDesc.destroy())
     
     this.mediumButton = this.add.sprite(1920 / 2, 1080 / 8 * 4, 'mediumButton')
     this.mediumButton.setInteractive({ useHandCursor: true })
