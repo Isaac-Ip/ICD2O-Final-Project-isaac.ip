@@ -17,7 +17,10 @@ class LevelScene extends Phaser.Scene {
     super({ key: 'levelScene' })
 
     this.LevelSceneBackgroundImage = null
-    this.startButton = null
+    this.easyButton = null
+    this.mediumButton = null
+    this.hardButton = null
+    this.insaneButton = null
   }
 
   /**
@@ -49,23 +52,23 @@ class LevelScene extends Phaser.Scene {
    * @param {object} data Any data passed via ScenePlugin.add() or ScenePlugin.start().
    */
   create (data) {
-    this.MenuSceneBackgroundImage = this.add.sprite(0, 0, 'levelSceneBackground')
-    this.MenuSceneBackgroundImage.x = 1920 / 2
-    this.MenuSceneBackgroundImage.y = 1080 / 2
-
-    this.startButton = this.add.sprite(1920 / 2, 1080 / 2 + 100, 'easyButton')
+    this.LevelSceneBackgroundImage = this.add.sprite(0, 0, 'levelSceneBackground')
+    this.LevelSceneBackgroundImage.x = 1920 / 2
+    this.LevelSceneBackgroundImage.y = 1080 / 2
+    
+    this.startButton = this.add.sprite(1920 / 2, 1080 / 8 * 3, 'easyButton')
     this.startButton.setInteractive({ useHandCursor: true })
     this.startButton.on('pointerdown', () => this.clickButton())
     
-    this.startButton = this.add.sprite(1920 / 2, 1080 / 2 + 100, 'mediumButton')
-    this.startButton.setInteractive({ useHandCursor: true })
-    this.startButton.on('pointerdown', () => this.clickButton())
-   
-    this.startButton = this.add.sprite(1920 / 2, 1080 / 2 + 100, 'hardButton')
+    this.startButton = this.add.sprite(1920 / 2, 1080 / 8 * 4, 'mediumButton')
     this.startButton.setInteractive({ useHandCursor: true })
     this.startButton.on('pointerdown', () => this.clickButton())
     
-    this.startButton = this.add.sprite(1920 / 2, 1080 / 2 + 100, 'insaneButton')
+    this.startButton = this.add.sprite(1920 / 2, 1080 / 8 * 5, 'hardButton')
+    this.startButton.setInteractive({ useHandCursor: true })
+    this.startButton.on('pointerdown', () => this.clickButton())
+    
+    this.startButton = this.add.sprite(1920 / 2, 1080 / 8 * 6, 'insaneButton')
     this.startButton.setInteractive({ useHandCursor: true })
     this.startButton.on('pointerdown', () => this.clickButton())
   }
