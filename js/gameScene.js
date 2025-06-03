@@ -10,16 +10,6 @@
  * This class is the Game Scene.
  */
 class GameScene extends Phaser.Scene {
-  // create an alien
-  createAlien () {
-    const alienXLocation = Math.floor(Math.random() * 1920) + 1 // this will get a number between 1 and 1920
-    let alienXVelocity = Math.floor(Math.random() * 50) + 1 // this will get a number between 1 and 50
-    alienXVelocity *= Math.round(Math.random()) ? 1 : -1 // this will add minus sign in 50% of cases
-    const anAlien = this.physics.add.sprite(alienXLocation, 100, 'alien')
-    anAlien.body.velocity.y = 200
-    anAlien.body.velocity.x = alienXVelocity
-    this.alienGroup.add(anAlien)
-  }
 
   /**
    * This method is the constructor.
@@ -54,13 +44,14 @@ class GameScene extends Phaser.Scene {
 
     // images
     this.load.image('Roulette Scene', 'assets/roulette-scene.png')
-    this.load.image('ship', 'assets/spaceShip.png')
-    this.load.image('missile', 'assets/missile.png')
-    this.load.image('alien', 'assets/alien.png')
+    this.load.image('boss', 'assets/boss.png')
+    this.load.image('player', 'assets/player.png')
+    this.load.image('Left Revolver', 'assets/revolverleft.png')
+    this.load.image('Right Revolver', 'assets/revolverright.png')
     // sound
-    this.load.audio('laser', 'assets/laser1.wav')
-    this.load.audio('explosion', 'assets/barrelExploding.wav')
-    this.load.audio('bomb', 'assets/bomb.wav')
+    this.load.audio('spin', 'assets/revolver-spin.wav')
+    this.load.audio('boom', 'assets/shot-fired.wav')
+    this.load.audio('blank', 'assets/blank-fired.wav')
   }
 
   /**
@@ -69,7 +60,7 @@ class GameScene extends Phaser.Scene {
    * @param {object} data Any data passed via ScenePlugin.add() or ScenePlugin.start().
    */
   create (data) {
-    this.background = this.add.image(0, 0, 'starBackground').setScale(2.0)
+    this.background = this.add.image(0, 0, 'Roulette Scene').setScale(2.0)
     this.background.setOrigin(0, 0)
 
     this.scoreText = this.add.text(10, 10, 'Score: ' + this.score.toString(), this.scoreTextStyle)
