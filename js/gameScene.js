@@ -17,12 +17,13 @@ class GameScene extends Phaser.Scene {
   constructor () {
     super({ key: 'gameScene' })
 
-    this.ship = null
-    this.fireMissile = false
-    this.score = 0
-    this.scoreText = null
-    this.scoreTextStyle = { font: '65px Arial', fill: '#ffffff', align: 'center' }
-    this.gameOverTextStyle = { font: '65px Arial', fill: '#ff0000', align: 'center' }
+    this.player = null
+    this.boss = null
+    this.GameSceneBackgroundImage = null
+    this.leftRevolver = null
+    this.rightRevolver = null
+    this.spinButton = null
+    this.fireButton = null
   }
 
   /**
@@ -43,11 +44,13 @@ class GameScene extends Phaser.Scene {
     console.log('Game Scene')
 
     // images
-    this.load.image('Roulette Scene', 'assets/roulette-scene.png')
+    this.load.image('gameSceneBackground', './assets/roulette-scene.png')
     this.load.image('boss', 'assets/boss.png')
     this.load.image('player', 'assets/player.png')
-    this.load.image('Left Revolver', 'assets/revolverleft.png')
-    this.load.image('Right Revolver', 'assets/revolverright.png')
+    this.load.image('leftRevolver', 'assets/revolverleft.png')
+    this.load.image('rightRevolver', 'assets/revolverright.png')
+    this.load.image('spinButton', 'assets/spin-button.png')
+    this.load.image('fireButton', 'assets/fire-button.png')
     // sound
     this.load.audio('spin', 'assets/revolver-spin.wav')
     this.load.audio('boom', 'assets/shot-fired.wav')
@@ -60,43 +63,16 @@ class GameScene extends Phaser.Scene {
    * @param {object} data Any data passed via ScenePlugin.add() or ScenePlugin.start().
    */
   create (data) {
-    this.background = this.add.image(0, 0, 'Roulette Scene').setScale(2.0)
-    this.background.setOrigin(0, 0)
+    this.background = this.add.sprite(0, 0, 'gameSceneBackground')
+    this.background.x = 1920 / 2
+    this.background.y = 1080 / 2
 
-    this.scoreText = this.add.text(10, 10, 'Score: ' + this.score.toString(), this.scoreTextStyle)
-
-    this.ship = this.physics.add.sprite(1920 / 2, 1080 - 100, 'ship')
-
-    // create a group for the missiles
-    this.missileGroup = this.physics.add.group()
-
-    // create a group for the aliens
-    this.alienGroup = this.add.group()
-    this.createAlien()
-
-    // collisions between the missiles and the aliens
-    this.physics.add.collider(this.missileGroup, this.alienGroup, function (missileCollide, alienCollide) {
-      alienCollide.destroy()
-      missileCollide.destroy()
-      this.sound.play('explosion')
-      this.score = this.score + 1
-      this.scoreText.setText('Score: ' + this.score.toString())
-      this.createAlien()
-      this.createAlien()
-    }.bind(this))
-
-    // collisions between the ship and the aliens
-    this.physics.add.collider(this.ship, this.alienGroup, function (shipCollide, alienCollide) {
-      this.sound.play('bomb')
-      this.physics.pause()
-      alienCollide.destroy()
-      shipCollide.destroy()
-      this.sound.play('explosion')
-      this.gameOverText = this.add.text(1920 / 2, 1080 / 2, 'Game Over!\nClick to play again.', this.gameOverTextStyle).setOrigin(0.5)
-      this.gameOverText.setInteractive({ useHandCursor: true })
-      this.gameOverText.on('pointerdown', () => this.scene.start('gameScene'))
-      this.score = 0
-    }.bind(this))
+    this.player = this.physics.add.sprite(1920 / 8, 1080 - 200, 'player')
+    this.boss = this.physics.add.sprite(1920 / 8 * 7, 1080 - 300, 'boss')
+    this.leftRevolver = this.physics.add.sprite(1920 / 8, 1080 - 600, 'leftRevolver')
+    this.rightRevolver = this.physics.add.sprite(1920 / 8 * 7, 1080 - 600, 'RightRevolver')
+    this.spinButton = this.physics.add.sprite(1920 / 8, 1080 - 100, 'spinButton')
+    this.fireButton = this.physics.add.sprite(1920 / 8 * 7, 1080 - 100, 'fireButton')
   }
 
   /**
@@ -106,42 +82,7 @@ class GameScene extends Phaser.Scene {
    * @param {number} delta - The delta time in ms since the last frame.
    */
   update (time, delta) {
-    const keyLeftObj = this.input.keyboard.addKey('LEFT')
-    const keyRightObj = this.input.keyboard.addKey('RIGHT')
-    const keySpaceObj = this.input.keyboard.addKey('SPACE')
-
-    if (keyLeftObj.isDown === true) {
-      this.ship.x -= 15
-      if (this.ship.x < 0) {
-        this.ship.x = 0
-      }
-    }
-
-    if (keyRightObj.isDown === true) {
-      this.ship.x += 15
-      if (this.ship.x > 1920) {
-        this.ship.x = 1920
-      }
-    }
-    if (keySpaceObj.isDown === true) {
-      if (this.fireMissile === false) {
-        // fire missile
-        this.fireMissile = true
-        const aNewMissile = this.physics.add.sprite(this.ship.x, this.ship.y, 'missile')
-        this.missileGroup.add(aNewMissile)
-        this.sound.play('laser')
-      }
-    }
-    if (keySpaceObj.isUp === true) {
-      this.fireMissile = false
-    }
-
-    this.missileGroup.children.each(function (item) {
-      item.y = item.y - 15
-      if (item.y < 0) {
-        item.destroy()
-      }
-    })
+    // pass
   }
 }
 
