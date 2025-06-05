@@ -32,7 +32,7 @@ class EasyGameScene extends Phaser.Scene {
    * @param {object} data Any data passed via ScenePlugin.add() or ScenePlugin.start().
    */
   init (data) {
-    this.cameras.main.setBackgroundColor('#0x5f6e7a')
+    this.cameras.main.setBackgroundColor('#5f6e7a')
   }
 
   /**
@@ -66,13 +66,13 @@ class EasyGameScene extends Phaser.Scene {
     this.background.x = 1920 / 2
     this.background.y = 1080 / 2
 
-    this.player = this.physics.add.sprite(1920 / 8, 1080 - 200, 'player')
-    this.boss = this.physics.add.sprite(1920 / 8 * 7, 1080 - 300, 'boss')
-    this.leftRevolver = this.physics.add.sprite(1920 / 8, 1080 - 600, 'leftRevolver')
-    this.rightRevolver = this.physics.add.sprite(1920 / 8 * 7, 1080 - 600, 'rightRevolver')
-    this.spinButton = this.physics.add.sprite(1920 / 8, 1080 - 100, 'spinButton').setInteractive()
+    this.player = this.add.sprite(1920 / 8, 1080 - 200, 'player')
+    this.boss = this.add.sprite(1920 / 8 * 7, 1080 - 300, 'boss')
+    this.leftRevolver = this.add.sprite(1920 / 8, 1080 - 600, 'leftRevolver')
+    this.rightRevolver = this.add.sprite(1920 / 8 * 7, 1080 - 600, 'rightRevolver')
+    this.spinButton = this.add.sprite(1920 / 8, 1080 - 100, 'spinButton').setInteractive()
     this.spinButton.on('pointerdown', () => this.clickSpinButton())
-    this.fireButton = this.physics.add.sprite(1920 / 8 * 7, 1080 - 100, 'fireButton').setInteractive()
+    this.fireButton = this.add.sprite(1920 / 8 * 7, 1080 - 100, 'fireButton').setInteractive()
     this.fireButton.on('pointerdown', () => this.clickFireButton())
 
     this.playerDeadlyBullet = Math.floor(Math.random() * 6) + 1
