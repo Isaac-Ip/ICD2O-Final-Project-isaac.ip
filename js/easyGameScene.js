@@ -73,6 +73,7 @@ class EasyGameScene extends Phaser.Scene {
     this.spinButton = this.physics.add.sprite(1920 / 8, 1080 - 100, 'spinButton')
     this.spinButton.on('pointerdown', () => this.clickSpinButton())
     this.fireButton = this.physics.add.sprite(1920 / 8 * 7, 1080 - 100, 'fireButton')
+    this.fireButton.on('pointerdown', () => this.clickFireButton())
   }
 
   /**
@@ -83,10 +84,17 @@ class EasyGameScene extends Phaser.Scene {
    */
   update (time, delta) {
     const playerDeadlyBullet = Math.floor(Math.random() * 6) + 1
-    let playerSelectedBullet = Math.floor(Math.random() * 6) + 1
+    const playerSelectedBullet = Math.floor(Math.random() * 6) + 1
     clickSpinButton () {
+      playerSelectedBullet = Math.floor(Math.random() * 6) + 1
+    }
+    clickFireButton () {
+    if (playerDeadlyBullet === playerSelectedBullet) {
+
+    } else {
+      
+    }
   
-  }
   }
 }
 
