@@ -85,7 +85,6 @@ class EasyGameScene extends Phaser.Scene {
 
   clickSpinButton () {
     this.playerSelectedBullet = Math.floor(Math.random() * 6) + 1
-    
   }
 
   async clickFireButton () {
