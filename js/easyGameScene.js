@@ -71,6 +71,7 @@ class EasyGameScene extends Phaser.Scene {
     this.leftRevolver = this.physics.add.sprite(1920 / 8, 1080 - 600, 'leftRevolver')
     this.rightRevolver = this.physics.add.sprite(1920 / 8 * 7, 1080 - 600, 'RightRevolver')
     this.spinButton = this.physics.add.sprite(1920 / 8, 1080 - 100, 'spinButton')
+    this.spinButton.on('pointerdown', () => this.clickSpinButton())
     this.fireButton = this.physics.add.sprite(1920 / 8 * 7, 1080 - 100, 'fireButton')
   }
 
@@ -81,7 +82,11 @@ class EasyGameScene extends Phaser.Scene {
    * @param {number} delta - The delta time in ms since the last frame.
    */
   update (time, delta) {
-    // pass
+    const playerDeadlyBullet = Math.floor(Math.random() * 6) + 1
+    let playerSelectedBullet = Math.floor(Math.random() * 6) + 1
+    clickSpinButton () {
+  
+  }
   }
 }
 
