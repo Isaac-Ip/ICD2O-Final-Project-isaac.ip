@@ -118,12 +118,15 @@ class LevelScene extends Phaser.Scene {
   clickEasyButton () {
     this.scene.start('easyGameScene')
   }
+
   clickMediumButton () {
     this.scene.start('easyGameScene')
   }
+
   clickHardButton () {
     this.scene.start('easyGameScene')
   }
+
   clickInsaneButton () {
     this.scene.start('easyGameScene')
   }

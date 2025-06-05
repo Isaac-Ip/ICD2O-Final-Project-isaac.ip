@@ -69,11 +69,16 @@ class EasyGameScene extends Phaser.Scene {
     this.player = this.physics.add.sprite(1920 / 8, 1080 - 200, 'player')
     this.boss = this.physics.add.sprite(1920 / 8 * 7, 1080 - 300, 'boss')
     this.leftRevolver = this.physics.add.sprite(1920 / 8, 1080 - 600, 'leftRevolver')
-    this.rightRevolver = this.physics.add.sprite(1920 / 8 * 7, 1080 - 600, 'RightRevolver')
-    this.spinButton = this.physics.add.sprite(1920 / 8, 1080 - 100, 'spinButton')
+    this.rightRevolver = this.physics.add.sprite(1920 / 8 * 7, 1080 - 600, 'rightRevolver')
+    this.spinButton = this.physics.add.sprite(1920 / 8, 1080 - 100, 'spinButton').setInteractive()
     this.spinButton.on('pointerdown', () => this.clickSpinButton())
-    this.fireButton = this.physics.add.sprite(1920 / 8 * 7, 1080 - 100, 'fireButton')
+    this.fireButton = this.physics.add.sprite(1920 / 8 * 7, 1080 - 100, 'fireButton').setInteractive()
     this.fireButton.on('pointerdown', () => this.clickFireButton())
+
+    this.playerDeadlyBullet = Math.floor(Math.random() * 6) + 1
+    this.playerSelectedBullet = Math.floor(Math.random() * 6) + 1
+    this.bossDeadlyBullet = Math.floor(Math.random() * 6) + 1
+    this.bossSelectedBullet = Math.floor(Math.random() * 6) + 1
   }
 
   /**
@@ -83,19 +88,27 @@ class EasyGameScene extends Phaser.Scene {
    * @param {number} delta - The delta time in ms since the last frame.
    */
   update (time, delta) {
-    const playerDeadlyBullet = Math.floor(Math.random() * 6) + 1
-    const playerSelectedBullet = Math.floor(Math.random() * 6) + 1
-    clickSpinButton () {
-      playerSelectedBullet = Math.floor(Math.random() * 6) + 1
-    }
-    clickFireButton () {
-    if (playerDeadlyBullet === playerSelectedBullet) {
+    // pass
+  }
 
+  async clickSpinButton () {
+    this.playerSelectedBullet = Math.floor(Math.random() * 6) + 1
+  }
+
+  async clickFireButton () {
+    if (this.playerDeadlyBullet === this.playerSelectedBullet) {
+      this.cameras.main.setBackgroundColor('#ffffff')
+      await this.delay(1000)
+      this.scene.start('levelScene')
     } else {
-      
+      if (this.bossDeadlyBullet === this.bossSelectedBullet) {
+        this.cameras.main.setBackgroundColor('#ffffff')
+        await this.delay(1000)
+        this.scene.start('levelScene')
+      } else {
+        this.clickFireButton()
+      }
     }
-  
   }
 }
-
 export default EasyGameScene
