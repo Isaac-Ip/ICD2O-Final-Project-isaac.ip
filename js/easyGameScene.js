@@ -90,25 +90,6 @@ class EasyGameScene extends Phaser.Scene {
   update (time, delta) {
     // pass
   }
-
-  async clickSpinButton () {
-    this.playerSelectedBullet = Math.floor(Math.random() * 6) + 1
-  }
-
-  async clickFireButton () {
-    if (this.playerDeadlyBullet === this.playerSelectedBullet) {
-      this.cameras.main.setBackgroundColor('#ffffff')
-      await this.delay(1000)
-      this.scene.start('levelScene')
-    } else {
-      if (this.bossDeadlyBullet === this.bossSelectedBullet) {
-        this.cameras.main.setBackgroundColor('#ffffff')
-        await this.delay(1000)
-        this.scene.start('levelScene')
-      } else {
-        this.clickFireButton()
-      }
-    }
-  }
 }
+
 export default EasyGameScene
