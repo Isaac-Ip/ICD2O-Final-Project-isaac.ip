@@ -4,17 +4,17 @@
 //
 // Created by: Isaac Ip
 // Created on: Apr 2025
-// This is the Game Scene
+// This is the Easy Difficulty Game Scene
 
 /**
- * This class is the Game Scene.
+ * This class is the Easy Difficulty Game Scene.
  */
-class GameScene extends Phaser.Scene {
+class EasyGameScene extends Phaser.Scene {
   /**
    * This method is the constructor.
    */
   constructor () {
-    super({ key: 'gameScene' })
+    super({ key: 'easyGameScene' })
 
     this.player = null
     this.boss = null
@@ -40,7 +40,7 @@ class GameScene extends Phaser.Scene {
    * Use it to load assets.
    */
   preload () {
-    console.log('Game Scene')
+    console.log('Easy Game Scene')
 
     // images
     this.load.image('gameSceneBackground', './assets/roulette-scene.png')
@@ -85,4 +85,4 @@ class GameScene extends Phaser.Scene {
   }
 }
 
-export default GameScene
+export default EasyGameScene

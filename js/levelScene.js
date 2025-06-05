@@ -115,8 +115,8 @@ class LevelScene extends Phaser.Scene {
     // pass
   }
 
-  clickButton () {
-    this.scene.start('gameScene')
+  clickEasyButton () {
+    this.scene.start('easyGameScene')
   }
 }
 
