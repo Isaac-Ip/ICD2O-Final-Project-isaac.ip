@@ -10,7 +10,7 @@
 import SplashScene from './splashScene.js'
 import TitleScene from './titleScene.js'
 import MenuScene from './menuScene.js'
-import GameScene from './gameScene.js'
+import GameScene from './easyGameScene.js'
 import LevelScene from './levelScene.js'
 
 // create the new scenes
@@ -54,4 +54,4 @@ game.scene.add('gameScene', gameScene)
 game.scene.add('levelScene', levelScene)
 
 // the start scene
-game.scene.start('splashScene')
+game.scene.start('levelScene')

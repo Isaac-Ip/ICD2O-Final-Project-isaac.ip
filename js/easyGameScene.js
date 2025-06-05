@@ -23,6 +23,7 @@ class EasyGameScene extends Phaser.Scene {
     this.rightRevolver = null
     this.spinButton = null
     this.fireButton = null
+    this.bossText1 = null
   }
 
   /**
@@ -50,6 +51,7 @@ class EasyGameScene extends Phaser.Scene {
     this.load.image('rightRevolver', 'assets/revolverright.png')
     this.load.image('spinButton', 'assets/spin-button.png')
     this.load.image('fireButton', 'assets/fire-button.png')
+    this.load.image('bossText1', 'assets/boss-text-1.png')
     // sound
     this.load.audio('spin', 'assets/revolver-spin.wav')
     this.load.audio('boom', 'assets/shot-fired.wav')
@@ -68,8 +70,8 @@ class EasyGameScene extends Phaser.Scene {
 
     this.player = this.add.sprite(1920 / 8, 1080 - 200, 'player')
     this.boss = this.add.sprite(1920 / 8 * 7, 1080 - 300, 'boss')
-    this.leftRevolver = this.add.sprite(1920 / 8, 1080 - 600, 'leftRevolver')
-    this.rightRevolver = this.add.sprite(1920 / 8 * 7, 1080 - 600, 'rightRevolver')
+    this.leftRevolver = this.add.sprite(1920 / 16 * 12, 1080 - 500, 'leftRevolver')
+    this.rightRevolver = this.add.sprite(1920 / 24 * 5, 1080 - 450, 'rightRevolver')
     this.spinButton = this.add.sprite(1920 / 8, 1080 - 100, 'spinButton').setInteractive()
     this.spinButton.on('pointerdown', () => this.clickSpinButton())
     this.fireButton = this.add.sprite(1920 / 8 * 7, 1080 - 100, 'fireButton').setInteractive()
@@ -83,20 +85,24 @@ class EasyGameScene extends Phaser.Scene {
 
   clickSpinButton () {
     this.playerSelectedBullet = Math.floor(Math.random() * 6) + 1
+    
   }
 
   async clickFireButton () {
     if (this.playerDeadlyBullet === this.playerSelectedBullet) {
       this.cameras.main.setBackgroundColor('#ffffff')
-      await this.delay(1000)
+      await this.delay(1)
       this.scene.start('levelScene')
     } else {
+      this.bossDeadlyBullet = Math.floor(Math.random() * 6) + 1
+      this.bossSelectedBullet = Math.floor(Math.random() * 6) + 1
       if (this.bossDeadlyBullet === this.bossSelectedBullet) {
+        this.GameSceneBackgroundImage = null
         this.cameras.main.setBackgroundColor('#ffffff')
         await this.delay(1000)
         this.scene.start('levelScene')
       } else {
-        this.clickSpinButton()
+        this.bossText1 = this.add.sprite(1920 / 8 * 4, 1080 / 2, 'bossText1')
       }
     }
   }
