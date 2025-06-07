@@ -124,7 +124,7 @@ class LevelScene extends Phaser.Scene {
   }
 
   clickHardButton () {
-    this.scene.start('easyGameScene')
+    this.scene.start('deathScene')
   }
 
   clickInsaneButton () {
