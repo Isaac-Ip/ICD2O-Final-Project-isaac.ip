@@ -29,6 +29,10 @@ class EasyGameScene extends Phaser.Scene {
     this.turnTextStyle = { font: '65px Arial', fill: '#ffffff', align: 'center' };
     this.bossText1 = null
     this.checkCheat = null
+    this.checkGood = null
+    this.checkBad = null
+    this.playerHitpoints = 3
+    this.bossHitpoints = 3
   }
 
   /**
