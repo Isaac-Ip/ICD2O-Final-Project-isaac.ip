@@ -91,7 +91,8 @@ class EasyGameScene extends Phaser.Scene {
     this.spinButton.on('pointerdown', () => this.clickSpinButton())
     this.fireButton = this.add.sprite(1920 / 8 * 7, 1080 - 100, 'fireButton').setInteractive()
     this.fireButton.on('pointerdown', () => this.clickFireButton())
-    
+    this.checkCheat = this.add.sprite(1920 / 2, 1080 - 200, 'checkCheat').setInteractive()
+    this.checkCheat.on('pointerdown', () => this.clickCheatButton())
 
     this.playerDeadlyBullet = Math.floor(Math.random() * 6) + 1
     this.playerSelectedBullet = Math.floor(Math.random() * 6) + 1
