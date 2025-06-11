@@ -13,7 +13,7 @@ class DeathScene extends Phaser.Scene {
   /**
    * This method is the constructor.
    */
-  constructor() {
+  constructor () {
     super({ key: 'deathScene' })
 
     this.gameOverTextStyle = { font: '80px Courier New', fill: '#ff0000', align: 'center' }
@@ -29,7 +29,7 @@ class DeathScene extends Phaser.Scene {
    * before preload() and create().
    * @param {object} data Any data passed via ScenePlugin.add() or ScenePlugin.start().
    */
-  init(data) {
+  init (data) {
     this.cameras.main.setBackgroundColor('#000000')
   }
 
@@ -37,7 +37,7 @@ class DeathScene extends Phaser.Scene {
    * Can be defined on your own Scenes.
    * Use it to load assets.
    */
-  preload() {
+  preload () {
     console.log('Death Scene')
   }
 
@@ -46,7 +46,7 @@ class DeathScene extends Phaser.Scene {
    * Use it to create your game objects.
    * @param {object} data Any data passed via ScenePlugin.add() or ScenePlugin.start().
    */
-  create(data) {
+  create (data) {
     this.quoteNumber = Math.floor(Math.random() * 6) + 1
     if (this.quoteNumber === 1) {
       this.quoteText = this.add.text(1920 / 2, 1080 / 2, '"Everything you want is\non the other side of fear."\n\nJack Canfield', this.gameOverTextStyle).setOrigin(0.5)
@@ -117,7 +117,7 @@ class DeathScene extends Phaser.Scene {
    * @param {number} time - The current time.
    * @param {number} delta - The delta time in ms since the last frame.
    */
-  update(time, delta) {
+  update (time, delta) {
     // pass
   }
 }

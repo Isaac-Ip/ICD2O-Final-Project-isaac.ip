@@ -13,7 +13,7 @@ class WinScene extends Phaser.Scene {
   /**
    * This method is the constructor.
    */
-  constructor() {
+  constructor () {
     super({ key: 'winScene' })
 
     this.gameOverTextStyle = { font: '80px Courier New', fill: '#ff0000', align: 'center' }
@@ -28,7 +28,7 @@ class WinScene extends Phaser.Scene {
    * before preload() and create().
    * @param {object} data Any data passed via ScenePlugin.add() or ScenePlugin.start().
    */
-  init(data) {
+  init (data) {
     this.cameras.main.setBackgroundColor('#000000')
   }
 
@@ -36,7 +36,7 @@ class WinScene extends Phaser.Scene {
    * Can be defined on your own Scenes.
    * Use it to load assets.
    */
-  preload() {
+  preload () {
     console.log('Win Scene')
   }
 
@@ -45,7 +45,7 @@ class WinScene extends Phaser.Scene {
    * Use it to create your game objects.
    * @param {object} data Any data passed via ScenePlugin.add() or ScenePlugin.start().
    */
-  create(data) {
+  create (data) {
     this.resetNumber = Math.floor(Math.random() * 2) + 1
     if (this.resetNumber === 1) {
       this.quoteText = this.add.text(1920 / 2, 1080 / 2, 'You finally won.', this.gameOverTextStyle).setOrigin(0.5)
@@ -124,7 +124,7 @@ class WinScene extends Phaser.Scene {
    * @param {number} time - The current time.
    * @param {number} delta - The delta time in ms since the last frame.
    */
-  update(time, delta) {
+  update (time, delta) {
     // pass
   }
 }
