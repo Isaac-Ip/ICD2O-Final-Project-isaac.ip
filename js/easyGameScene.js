@@ -13,7 +13,7 @@ class EasyGameScene extends Phaser.Scene {
   /**
    * This method is the constructor.
    */
-  constructor () {
+  constructor() {
     super({ key: 'easyGameScene' })
 
     this.player = null
@@ -33,6 +33,8 @@ class EasyGameScene extends Phaser.Scene {
     this.checkBad = null
     this.playerHitpoints = 3
     this.bossHitpoints = 3
+    this.playerHitpointsText = null
+    this.bossHitpointsText = null
   }
 
   /**
@@ -41,7 +43,7 @@ class EasyGameScene extends Phaser.Scene {
    * before preload() and create().
    * @param {object} data Any data passed via ScenePlugin.add() or ScenePlugin.start().
    */
-  init (data) {
+  init(data) {
     this.cameras.main.setBackgroundColor('#5f6e7a')
   }
 
@@ -49,7 +51,7 @@ class EasyGameScene extends Phaser.Scene {
    * Can be defined on your own Scenes.
    * Use it to load assets.
    */
-  preload () {
+  preload() {
     console.log('Easy Game Scene')
 
     // images
@@ -64,7 +66,7 @@ class EasyGameScene extends Phaser.Scene {
     this.load.image('checkCheat', 'assets/check-cheat.png')
     this.load.image('checkGood', 'assets/check-good.png')
     this.load.image('checkBad', 'assets/check-bad.png')
-    
+
     // sound
     this.load.audio('spin', 'assets/revolver-spin.wav')
     this.load.audio('boom', 'assets/shot-fired.wav')
@@ -76,12 +78,14 @@ class EasyGameScene extends Phaser.Scene {
    * Use it to create your game objects.
    * @param {object} data Any data passed via ScenePlugin.add() or ScenePlugin.start().
    */
-  create (data) {
+  create(data) {
     this.background = this.add.sprite(0, 0, 'gameSceneBackground')
     this.background.x = 1920 / 2
     this.background.y = 1080 / 2
 
     this.turnText = this.add.text(30, 20, 'Player Turn', this.turnTextStyle)
+    this.playerHitpointsText = this.add.text(1920 / 2, 1080 / 2, 'Player HP: {$playerHitpoints}', this.turnTextStyle)
+    this.bossHitpointsText = this.add.text(1800, 1000, 'Boss HP: ', this.turnTextStyle)
 
     this.player = this.add.sprite(1920 / 8, 1080 - 200, 'player')
     this.boss = this.add.sprite(1920 / 8 * 7, 1080 - 300, 'boss')
@@ -100,16 +104,26 @@ class EasyGameScene extends Phaser.Scene {
     this.bossSelectedBullet = Math.floor(Math.random() * 6) + 1
   }
 
+  clickCheatButton() {
+    this.playerSelectedBullet = Math.floor(Math.random() * 6) + 1
+    this.time.addEvent({ delay: 3000, callback: this.nextTurn, callbackScope: this });
+    this.sound.play("spin")
+    this.spinNumber = this.spinNumber + 1;
+    this.bossText1 = this.add.sprite(1920 / 2, 1080 - 600, 'bossText1')
+  }
   clickSpinButton() {
     this.playerSelectedBullet = Math.floor(Math.random() * 6) + 1
     this.time.addEvent({ delay: 3000, callback: this.nextTurn, callbackScope: this });
     this.sound.play("spin")
-      this.spinNumber = this.spinNumber + 1;
-      this.bossText1 = this.add.sprite(1920 / 2, 1080 - 600, 'bossText1')
+    this.spinNumber = this.spinNumber + 1;
+    this.bossText1 = this.add.sprite(1920 / 2, 1080 - 600, 'bossText1')
   }
 
   async clickFireButton() {
-    this.bossText1.destroy()
+    if (this.bossText1) {
+      this.bossText1.destroy()
+      this.bossText1 = null
+    }
     if (this.spinNumber === 0) {
       this.spinError = this.add.text(1920 / 2, 1080 / 2, "Spin Before You Shoot!\nClick to continue.", this.turnTextStyle).setOrigin(0.5);
       this.spinError.setInteractive({ useHandCursor: true });
@@ -124,14 +138,19 @@ class EasyGameScene extends Phaser.Scene {
         this.bossSelectedBullet = Math.floor(Math.random() * 6) + 1
         this.spinNumber = 0
         this.turnText.destroy()
+        this.turnText = null
         this.turnText = this.add.text(30, 20, 'Boss Turn', this.turnTextStyle)
         if (this.bossDeadlyBullet === this.bossSelectedBullet) {
           this.sound.play('boom')
-          this.scene.start('deathScene')
+          this.scene.start('winScene')
         } else {
           this.sound.play('blank')
-          this.turnText.destroy()
-          this.turnText = this.add.text(30, 20, 'Player Turn', this.turnTextStyle)
+          setTimeout(() => {
+            if (this.turnText) {
+              this.turnText.destroy()
+            }
+            this.turnText = this.add.text(30, 20, 'Player Turn', this.turnTextStyle)
+          }, 2000)
         }
       }
     }
@@ -143,10 +162,10 @@ class EasyGameScene extends Phaser.Scene {
    * @param {number} time - The current time.
    * @param {number} delta - The delta time in ms since the last frame.
    */
-  update (time, delta) {
+  update(time, delta) {
     // pass
-    } 
   }
+}
 
 
 export default EasyGameScene

@@ -13,7 +13,7 @@ class LevelScene extends Phaser.Scene {
   /**
    * This method is the constructor.
    */
-  constructor () {
+  constructor() {
     super({ key: 'levelScene' })
 
     this.LevelSceneBackgroundImage = null
@@ -37,7 +37,7 @@ class LevelScene extends Phaser.Scene {
    * before preload() and create().
    * @param {object} data Any data passed via ScenePlugin.add() or ScenePlugin.start().
    */
-  init (data) {
+  init(data) {
     this.cameras.main.setBackgroundColor('#ffffff')
   }
 
@@ -45,7 +45,7 @@ class LevelScene extends Phaser.Scene {
    * Can be defined on your own Scenes.
    * Use it to load assets.
    */
-  preload () {
+  preload() {
     console.log('Level Scene')
     this.load.image('levelSceneBackground', './assets/difficulty-scene.png')
     this.load.image('easyButton', './assets/easy-button.png')
@@ -67,7 +67,7 @@ class LevelScene extends Phaser.Scene {
    * Use it to create your game objects.
    * @param {object} data Any data passed via ScenePlugin.add() or ScenePlugin.start().
    */
-  create (data) {
+  create(data) {
     this.LevelSceneBackgroundImage = this.add.sprite(0, 0, 'levelSceneBackground')
     this.LevelSceneBackgroundImage.x = 1920 / 2
     this.LevelSceneBackgroundImage.y = 1080 / 2
@@ -111,24 +111,24 @@ class LevelScene extends Phaser.Scene {
    * @param {number} time The current time.
    * @param {number} delta The delta time in ms since the last frame.
    */
-  update (time, delta) {
+  update(time, delta) {
     // pass
   }
 
-  clickEasyButton () {
+  clickEasyButton() {
     this.scene.start('easyGameScene')
   }
 
-  clickMediumButton () {
+  clickMediumButton() {
     this.scene.start('easyGameScene')
   }
 
-  clickHardButton () {
+  clickHardButton() {
     this.scene.start('deathScene')
   }
 
-  clickInsaneButton () {
-    this.scene.start('easyGameScene')
+  clickInsaneButton() {
+    this.scene.start('winScene')
   }
 }
 

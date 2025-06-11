@@ -13,6 +13,7 @@ import MenuScene from './menuScene.js'
 import EasyGameScene from './easyGameScene.js'
 import LevelScene from './levelScene.js'
 import DeathScene from './deathScene.js'
+import WinScene from './winScene.js'
 
 // create the new scenes
 const splashScene = new SplashScene()
@@ -21,6 +22,7 @@ const menuScene = new MenuScene()
 const easyGameScene = new EasyGameScene()
 const levelScene = new LevelScene()
 const deathScene = new DeathScene()
+const winScene = new WinScene()
 
 /**
  * Start Phaser Game.
@@ -55,7 +57,8 @@ game.scene.add('menuScene', menuScene)
 game.scene.add('easyGameScene', easyGameScene)
 game.scene.add('levelScene', levelScene)
 game.scene.add('deathScene', deathScene)
+game.scene.add('winScene', winScene)
+// start the splash scene
 
 // the start scene
-game.scene.start('splashScene')
-
+game.scene.start('levelScene')
