@@ -11,16 +11,26 @@ import SplashScene from './splashScene.js'
 import TitleScene from './titleScene.js'
 import MenuScene from './menuScene.js'
 import EasyGameScene from './easyGameScene.js'
+import MediumGameScene from './mediumGameScene.js'
+import HardGameScene from './hardGameScene.js'
+import InsaneGameScene from './insaneGameScene.js'
 import LevelScene from './levelScene.js'
 import DeathScene from './deathScene.js'
+import WinScene from './winScene.js'
+import InstructionsScene from './instructionsScene.js'
 
 // create the new scenes
 const splashScene = new SplashScene()
 const titleScene = new TitleScene()
 const menuScene = new MenuScene()
 const easyGameScene = new EasyGameScene()
+const mediumGameScene = new MediumGameScene()
+const hardGameScene = new HardGameScene()
+const insaneGameScene = new InsaneGameScene()
 const levelScene = new LevelScene()
 const deathScene = new DeathScene()
+const winScene = new WinScene()
+const instructionsScene = new InstructionsScene()
 
 /**
  * Start Phaser Game.
@@ -53,9 +63,14 @@ game.scene.add('splashScene', splashScene)
 game.scene.add('titleScene', titleScene)
 game.scene.add('menuScene', menuScene)
 game.scene.add('easyGameScene', easyGameScene)
+game.scene.add('mediumGameScene', mediumGameScene)
+game.scene.add('hardGameScene', hardGameScene)
+game.scene.add('insaneGameScene', insaneGameScene)
 game.scene.add('levelScene', levelScene)
 game.scene.add('deathScene', deathScene)
+game.scene.add('winScene', winScene)
+game.scene.add('instructionsScene', instructionsScene)
+// start the splash scene
 
 // the start scene
 game.scene.start('splashScene')
-
