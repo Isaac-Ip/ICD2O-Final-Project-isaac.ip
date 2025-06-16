@@ -107,7 +107,7 @@ class WinScene extends Phaser.Scene {
               this.quoteText.on('pointerdown', () => {
                 this.quoteText.destroy()
                 this.quoteText = null
-                this.quoteText = this.add.text(1920 / 2, 1080 / 2, 'Before you know it\n you are standing in front\nof the same bar you never\nwanted to come back to.', this.gameOverTextStyle).setOrigin(0.5)
+                this.quoteText = this.add.text(1920 / 2, 1080 / 2, 'Before you know it,\n you are standing in front\nof the same bar you never\nwanted to come back to.', this.gameOverTextStyle).setOrigin(0.5)
                 this.quoteText.setInteractive({ useHandCursor: true })
                 this.quoteText.on('pointerdown', () => this.scene.start('levelScene'))
               })

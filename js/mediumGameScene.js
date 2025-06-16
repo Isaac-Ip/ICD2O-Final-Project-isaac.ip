@@ -4,17 +4,17 @@
 //
 // Created by: Isaac Ip
 // Created on: Apr 2025
-// This is the Easy Difficulty Game Scene
+// This is the Medium Difficulty Game Scene
 
 /**
- * This class is the Easy Difficulty Game Scene.
+ * This class is the Medium Difficulty Game Scene.
  */
-class EasyGameScene extends Phaser.Scene {
+class MediumGameScene extends Phaser.Scene {
   /**
    * This method is the constructor.
    */
   constructor () {
-    super({ key: 'easyGameScene' })
+    super({ key: 'mediumGameScene' })
 
     this.player = null
     this.boss = null
@@ -27,8 +27,8 @@ class EasyGameScene extends Phaser.Scene {
     this.fireButton = null
     this.turnText = null
     this.turnTextStyle = { font: '65px Arial', fill: '#ffffff', align: 'center' }
+    this.bossText1 = null
     this.checkCheat = null
-    this.checkCheatUsed = false
     this.checkGood = null
     this.checkBad = null
     this.playerHitpoints = 5
@@ -36,6 +36,18 @@ class EasyGameScene extends Phaser.Scene {
     this.playerHitpointsText = null
     this.bossHitpointsText = null
     this.bloodstain = null
+    this.shield = null
+    this.shieldFade = null
+    this.shieldPulse1 = null
+    this.shieldPulse2 = null
+    this.shieldPulse3 = null
+    this.shieldUsed = false
+    this.shieldColor = null
+    this.protect = null
+    this.cooldown3 = null
+    this.cooldown2 = null
+    this.cooldown1 = null
+    this.shieldCooldown = 0
   }
 
   /**
@@ -53,7 +65,7 @@ class EasyGameScene extends Phaser.Scene {
    * Use it to load assets.
    */
   preload () {
-    console.log('Easy Game Scene')
+    console.log('Medium Game Scene')
 
     // images
     this.load.image('gameSceneBackground', './assets/roulette-scene.png')
@@ -63,10 +75,21 @@ class EasyGameScene extends Phaser.Scene {
     this.load.image('rightRevolver', 'assets/revolverright.png')
     this.load.image('spinButton', 'assets/spin-button.png')
     this.load.image('fireButton', 'assets/fire-button.png')
+    this.load.image('bossText1', 'assets/boss-text-1.png')
     this.load.image('checkCheat', 'assets/check-cheat.png')
     this.load.image('checkGood', 'assets/check-good.png')
     this.load.image('checkBad', 'assets/check-bad.png')
     this.load.image('bloodstain', 'assets/bloodstain.png')
+    this.load.image('shield', 'assets/shield.png')
+    this.load.image('shieldFade', 'assets/shield-fade.png')
+    this.load.image('shieldColor', 'assets/shield-color.png')
+    this.load.image('shieldPulse1', 'assets/shield-pulse-1.png')
+    this.load.image('shieldPulse2', 'assets/shield-pulse-2.png')
+    this.load.image('shieldPulse3', 'assets/shield-pulse-3.png')
+    this.load.image('protect', 'assets/protect.png')
+    this.load.image('cooldown1', 'assets/cooldown1.png')
+    this.load.image('cooldown2', 'assets/cooldown2.png')
+    this.load.image('cooldown3', 'assets/cooldown3.png')
 
     // sound
     this.load.audio('spin', 'assets/revolver-spin.wav')
@@ -98,11 +121,32 @@ class EasyGameScene extends Phaser.Scene {
     this.fireButton.on('pointerdown', () => this.clickFireButton())
     this.checkCheat = this.add.sprite(1920 - 1750, 1080 - 930, 'checkCheat').setInteractive()
     this.checkCheat.on('pointerdown', () => this.clickCheatButton())
+    this.shield = this.add.sprite(1920 - 180, 1080 - 930, 'shield').setInteractive()
+    this.shield.on('pointerdown', () => this.clickShieldButton())
 
-    this.playerDeadlyBullet = Math.floor(Math.random() * 6) + 1
-    this.playerSelectedBullet = Math.floor(Math.random() * 6) + 1
+    this.playerDeadlyBullet = Math.floor(Math.random() * 5) + 1
+    this.playerSelectedBullet = Math.floor(Math.random() * 5) + 1
     this.bossDeadlyBullet = Math.floor(Math.random() * 6) + 1
     this.bossSelectedBullet = Math.floor(Math.random() * 6) + 1
+  }
+
+  clickShieldButton () {
+    this.shieldUsed = true
+    this.shield.destroy()
+    this.shield = null
+    this.shieldFade = this.add.sprite(1920 - 180, 1080 - 930, 'shieldFade').setInteractive()
+    setTimeout(() => { this.shieldFade.destroy() }, 100)
+    setTimeout(() => { this.shieldFade = null }, 100)
+    setTimeout(() => { this.shieldPulse1 = this.add.sprite(1920 - 180, 1080 - 930, 'shieldPulse1').setInteractive() }, 100)
+    setTimeout(() => { this.shieldPulse1 = this.shieldPulse1.destroy() }, 200)
+    setTimeout(() => { this.shieldPulse1 = this.shieldPulse1 = null }, 200)
+    setTimeout(() => { this.shieldPulse2 = this.add.sprite(1920 - 180, 1080 - 930, 'shieldPulse2').setInteractive() }, 200)
+    setTimeout(() => { this.shieldPulse2 = this.shieldPulse2.destroy() }, 300)
+    setTimeout(() => { this.shieldPulse2 = this.shieldPulse2 = null }, 300)
+    setTimeout(() => { this.shieldPulse3 = this.add.sprite(1920 - 180, 1080 - 930, 'shieldPulse3').setInteractive() }, 300)
+    setTimeout(() => { this.shieldPulse3 = this.shieldPulse3.destroy() }, 400)
+    setTimeout(() => { this.shieldPulse3 = this.shieldPulse3 = null }, 400)
+    setTimeout(() => { this.shieldColor = this.add.sprite(1920 - 180, 1080 - 930, 'shieldColor').setInteractive() }, 400)
   }
 
   clickCheatButton () {
@@ -122,7 +166,7 @@ class EasyGameScene extends Phaser.Scene {
   }
 
   clickSpinButton () {
-    this.playerSelectedBullet = Math.floor(Math.random() * 6) + 1
+    this.playerSelectedBullet = Math.floor(Math.random() * 5) + 1
     this.time.addEvent({ delay: 3000, callback: this.nextTurn, callbackScope: this })
     this.sound.play('spin')
     this.tweens.add({
@@ -146,9 +190,14 @@ class EasyGameScene extends Phaser.Scene {
       }
     })
     this.spinNumber = this.spinNumber + 1
+    this.bossText1 = this.add.sprite(1920 / 2, 1080 - 600, 'bossText1')
   }
 
-  async clickFireButton () {
+  clickFireButton () {
+    if (this.bossText1) {
+      this.bossText1.destroy()
+      this.bossText1 = null
+    }
     if (this.checkBad) {
       this.checkBad.destroy()
       this.checkBad = null
@@ -162,53 +211,82 @@ class EasyGameScene extends Phaser.Scene {
       this.spinError.setInteractive({ useHandCursor: true })
       this.spinError.on('pointerdown', () => this.spinError.destroy())
     } else {
-      if (this.playerDeadlyBullet === this.playerSelectedBullet) {
-        this.spinNumber = 0
-        if (this.playerHitpoints > 0) {
-          this.tweens.add({
-            targets: this.rightRevolver,
-            angle: 30,
-            duration: 150,
-            yoyo: true,
-            ease: 'Cubic.easeOut',
-            onComplete: () => {
-              this.rightRevolver.angle = 0
-            }
-          })
-          this.bloodstain = this.add.sprite(1920 / 2, 1080 / 2, 'bloodstain')
-          this.bloodstain.setAlpha(0.5)
-          setTimeout(() => this.bloodstain.setAlpha(0.45), 100)
-          setTimeout(() => this.bloodstain.setAlpha(0.4), 200)
-          setTimeout(() => this.bloodstain.setAlpha(0.35), 300)
-          setTimeout(() => this.bloodstain.setAlpha(0.3), 400)
-          setTimeout(() => this.bloodstain.setAlpha(0.25), 500)
-          setTimeout(() => this.bloodstain.setAlpha(0.2), 600)
-          setTimeout(() => this.bloodstain.setAlpha(0.15), 700)
-          setTimeout(() => this.bloodstain.setAlpha(0.1), 800)
-          setTimeout(() => this.bloodstain.setAlpha(0.05), 900)
-          setTimeout(() => this.bloodstain.destroy(), 1000)
-          setTimeout(() => this.bloodstain = null, 1000)
-          this.playerHitpoints -= 1
-          this.playerHitpointsText.destroy()
-          this.playerHitpointsText = this.add.text(65, 350, `Player HP: ${this.playerHitpoints}`, this.turnTextStyle)
-          this.sound.play('boom')
+      this.tweens.add({
+        targets: this.rightRevolver,
+        angle: 30,
+        duration: 150,
+        yoyo: true,
+        ease: 'Cubic.easeOut',
+        onComplete: () => {
+          this.rightRevolver.angle = 0
         }
-        if (this.playerHitpoints === 0) {
-          this.playerHitpoints = 5
-          this.bossHitpoints = 5
-          this.scene.start('deathScene')
+      })
+      if (this.shieldUsed === true) {
+        this.spinNumber = 0
+        if (this.shieldCooldown === 0) {
+          this.shieldColor.destroy()
+          this.protect = this.add.sprite(1920 / 2, 1080 / 2, 'protect')
+          this.protect.setAlpha(0.5)
+          setTimeout(() => this.protect.setAlpha(0.45), 100)
+          setTimeout(() => this.protect.setAlpha(0.4), 200)
+          setTimeout(() => this.protect.setAlpha(0.35), 300)
+          setTimeout(() => this.protect.setAlpha(0.3), 400)
+          setTimeout(() => this.protect.setAlpha(0.25), 500)
+          setTimeout(() => this.protect.setAlpha(0.2), 600)
+          setTimeout(() => this.protect.setAlpha(0.15), 700)
+          setTimeout(() => this.protect.setAlpha(0.1), 800)
+          setTimeout(() => this.protect.setAlpha(0.05), 900)
+          setTimeout(() => this.protect.destroy(), 1000)
+          setTimeout(() => this.protect = null, 1000)
+          this.shieldCooldown = 3
+          this.cooldown3 = this.add.sprite(1920 - 180, 1080 - 930, 'cooldown3')
+        } else if (this.shieldCooldown === 3) {
+          this.cooldown3.destroy()
+          this.shieldCooldown = 2
+          this.cooldown2 = this.add.sprite(1920 - 180, 1080 - 930, 'cooldown2')
+        } else if (this.shieldCooldown === 2) {
+          this.cooldown2.destroy()
+          this.shieldCooldown = 1
+          this.cooldown1 = this.add.sprite(1920 - 180, 1080 - 930, 'cooldown1')
+        } else if (this.shieldCooldown === 1) {
+          this.cooldown1.destroy()
+          this.shieldCooldown = 0
+          this.shield = this.add.sprite(1920 - 180, 1080 - 930, 'shield').setInteractive()
+          this.shield.on('pointerdown', () => this.clickShieldButton())
+          this.shieldUsed = false
+        }
+      }
+      if (this.playerDeadlyBullet === this.playerSelectedBullet) {
+        if (this.shieldUsed === true && this.shieldCooldown === 3) {
+          this.shieldCooldown = 3
+        } else {
+          if (this.playerHitpoints > 0) {
+            this.spinNumber = 0
+            this.bloodstain = this.add.sprite(1920 / 2, 1080 / 2, 'bloodstain')
+            this.bloodstain.setAlpha(0.5)
+            setTimeout(() => this.bloodstain.setAlpha(0.45), 100)
+            setTimeout(() => this.bloodstain.setAlpha(0.4), 200)
+            setTimeout(() => this.bloodstain.setAlpha(0.35), 300)
+            setTimeout(() => this.bloodstain.setAlpha(0.3), 400)
+            setTimeout(() => this.bloodstain.setAlpha(0.25), 500)
+            setTimeout(() => this.bloodstain.setAlpha(0.2), 600)
+            setTimeout(() => this.bloodstain.setAlpha(0.15), 700)
+            setTimeout(() => this.bloodstain.setAlpha(0.1), 800)
+            setTimeout(() => this.bloodstain.setAlpha(0.05), 900)
+            setTimeout(() => this.bloodstain.destroy(), 1000)
+            setTimeout(() => this.bloodstain = null, 1000)
+            this.playerHitpoints -= 1
+            this.playerHitpointsText.destroy()
+            this.playerHitpointsText = this.add.text(65, 350, `Player HP: ${this.playerHitpoints}`, this.turnTextStyle)
+            this.sound.play('boom')
+          }
+          if (this.playerHitpoints === 0) {
+            this.playerHitpoints = 5
+            this.bossHitpoints = 5
+            this.scene.start('deathScene')
+          }
         }
       } else {
-        this.tweens.add({
-          targets: this.rightRevolver,
-          angle: 30,
-          duration: 150,
-          yoyo: true,
-          ease: 'Cubic.easeOut',
-          onComplete: () => {
-            this.rightRevolver.angle = 0
-          }
-        })
         this.sound.play('blank')
         this.spinNumber = 0
       }
@@ -217,18 +295,18 @@ class EasyGameScene extends Phaser.Scene {
       this.turnText = null
       this.turnText = this.add.text(800, 1000, 'Boss Turn', this.turnTextStyle)
       setTimeout(() => {
+        this.tweens.add({
+          targets: this.leftRevolver,
+          angle: -30,
+          duration: 150,
+          yoyo: true,
+          ease: 'Cubic.easeOut',
+          onComplete: () => {
+            this.leftRevolver.angle = 0
+          }
+        })
         if (this.bossDeadlyBullet === this.bossSelectedBullet) {
           if (this.bossHitpoints > 0) {
-            this.tweens.add({
-              targets: this.leftRevolver,
-              angle: -30,
-              duration: 150,
-              yoyo: true,
-              ease: 'Cubic.easeOut',
-              onComplete: () => {
-                this.leftRevolver.angle = 0
-              }
-            })
             this.bossHitpoints -= 1
             this.bossHitpointsText.destroy()
             this.bossHitpointsText = null
@@ -241,16 +319,6 @@ class EasyGameScene extends Phaser.Scene {
             }
           }
         } else {
-          this.tweens.add({
-            targets: this.leftRevolver,
-            angle: -30,
-            duration: 150,
-            yoyo: true,
-            ease: 'Cubic.easeOut',
-            onComplete: () => {
-              this.leftRevolver.angle = 0
-            }
-          })
           this.sound.play('blank')
           setTimeout(() => {
             if (this.turnText) {
@@ -275,4 +343,4 @@ class EasyGameScene extends Phaser.Scene {
   }
 }
 
-export default EasyGameScene
+export default MediumGameScene
