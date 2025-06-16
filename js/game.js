@@ -73,4 +73,4 @@ game.scene.add('instructionsScene', instructionsScene)
 // start the splash scene
 
 // the start scene
-game.scene.start('menuScene')
+game.scene.start('splashScene')
