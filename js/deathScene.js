@@ -59,7 +59,7 @@ class DeathScene extends Phaser.Scene {
         this.deathMessage.on('pointerdown', () => this.scene.start('levelScene'))
       })
     } else if (this.quoteNumber === 2) {
-      this.quoteText = this.add.text(1920 / 2, 1080 / 2, '"Pain is temporary.\nQuitting lasts forever.\”\n\nLance Armstrong', this.gameOverTextStyle).setOrigin(0.5)
+      this.quoteText = this.add.text(1920 / 2, 1080 / 2, '"Pain is temporary.\nQuitting lasts forever."\n\nLance Armstrong', this.gameOverTextStyle).setOrigin(0.5)
       this.quoteText.setInteractive({ useHandCursor: true })
       this.quoteText.on('pointerdown', () => {
         this.quoteText.destroy()

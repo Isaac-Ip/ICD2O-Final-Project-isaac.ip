@@ -187,7 +187,7 @@ class EasyGameScene extends Phaser.Scene {
           setTimeout(() => this.bloodstain.setAlpha(0.1), 800)
           setTimeout(() => this.bloodstain.setAlpha(0.05), 900)
           setTimeout(() => this.bloodstain.destroy(), 1000)
-          setTimeout(() => this.bloodstain = null, 1000)
+          setTimeout(() => (this.bloodstain = null), 1000)
           this.playerHitpoints -= 1
           this.playerHitpointsText.destroy()
           this.playerHitpointsText = this.add.text(65, 350, `Player HP: ${this.playerHitpoints}`, this.turnTextStyle)

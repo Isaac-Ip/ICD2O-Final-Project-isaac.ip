@@ -237,7 +237,7 @@ class MediumGameScene extends Phaser.Scene {
           setTimeout(() => this.protect.setAlpha(0.1), 800)
           setTimeout(() => this.protect.setAlpha(0.05), 900)
           setTimeout(() => this.protect.destroy(), 1000)
-          setTimeout(() => this.protect = null, 1000)
+          setTimeout(() => (this.protect = null), 1000)
           this.shieldCooldown = 3
           this.cooldown3 = this.add.sprite(1920 - 180, 1080 - 930, 'cooldown3')
         } else if (this.shieldCooldown === 3) {
@@ -274,7 +274,7 @@ class MediumGameScene extends Phaser.Scene {
             setTimeout(() => this.bloodstain.setAlpha(0.1), 800)
             setTimeout(() => this.bloodstain.setAlpha(0.05), 900)
             setTimeout(() => this.bloodstain.destroy(), 1000)
-            setTimeout(() => this.bloodstain = null, 1000)
+            setTimeout(() => (this.bloodstain = null), 1000)
             this.playerHitpoints -= 1
             this.playerHitpointsText.destroy()
             this.playerHitpointsText = this.add.text(65, 350, `Player HP: ${this.playerHitpoints}`, this.turnTextStyle)

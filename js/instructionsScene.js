@@ -56,7 +56,7 @@ class InstructionsScene extends Phaser.Scene {
       this.instructions.on('pointerdown', () => {
         this.instructions.destroy()
         this.instructions = null
-        this.instructions = this.add.text(1920 / 2, 1080 / 2, 'The large button in the top\nleft corner is the \"cheat\" button.\nThis defensive ability lets you see\nif the chamber has a blank or not.\nIt has one use per game,\nso use it wisely.', this.instructionsTextStyle).setOrigin(0.5)
+        this.instructions = this.add.text(1920 / 2, 1080 / 2, 'The large button in the top\nleft corner is the "cheat" button.\nThis defensive ability lets you see\nif the chamber has a blank or not.\nIt has one use per game,\nso use it wisely.', this.instructionsTextStyle).setOrigin(0.5)
         this.instructions.setInteractive({ useHandCursor: true })
         this.instructions.on('pointerdown', () => {
           this.instructions.destroy()
